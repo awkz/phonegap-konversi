@@ -32,7 +32,7 @@
     
     <div class="row">
       <div class="col-5">
-        <select id="convert1" class="form-control" style="box-shadow: none;">
+        <select id="convert1" class="form-control" onchange="konversi()">
           <option value="mm">mm</option>
           <option value="cm">cm</option>
           <option value="dm">dm</option>
@@ -47,12 +47,12 @@
         </select>
       </div>
       <div class="col-7">
-        <input type="number" id="angka1" value="0" class="form-control" readonly>
+        <input type="text" id="angka1" value="0" class="form-control" readonly>
       </div>
     </div>
     <div class="row">
       <div class="col-5">
-        <select id="convert2" class="form-control">
+        <select id="convert2" class="form-control" onchange="konversi()">
           <option value="mm">mm</option>
           <option value="cm">cm</option>
           <option value="dm">dm</option>
@@ -67,7 +67,7 @@
         </select>
       </div>
       <div class="col-7">
-        <input type="number" id="angka2" value="0" class="form-control" readonly>
+        <input type="text" id="angka2" value="0" class="form-control" readonly>
       </div>
     </div>
     
@@ -127,66 +127,48 @@
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script>
-    memory = "0";
-    current = "0";
-    operasi = 0;
-    
-
+    angka1= "0";
+    angka2= "0";
+    convert1 = "";
+    convert2 = "";
     function tambahAngka(angka){
-      if((eval(current) == 0) && (current.indexOf(".") == -1)){
-        current = angka;
+      if((eval(angka1) == 0) && (angka1.indexOf(".") == -1)){
+        angka1 = angka;
       } else {
-        current += angka;
+        angka1 += angka;
       }
-      document.getElementById("angka1").value = current;
+      document.getElementById("angka1").value = angka1;
+      konversi();
     }
-
-    function operate(op){
-      if(op.indexOf("+") > -1){ operasi = 1; }
-      if(op.indexOf("-") > -1){ operasi = 2; }
-      if(op.indexOf("*") > -1){ operasi = 3; }
-      if(op.indexOf("/") > -1){ operasi = 4; }
-
-      memory = current;
-      current="";
-      document.getElementById("Display").value = current;
-    }
-
-    function hasil(){
-      if(operasi == 1) { current = eval(memory) + eval(current); }
-      if(operasi == 2) { current = eval(memory) - eval(current); }
-      if(operasi == 3) { current = eval(memory) * eval(current); }
-      if(operasi == 4) { current = eval(memory) / eval(current); }
-
-      memory = "0";
-      operasi = 0;
-      document.getElementById("Display").value = current;
+    
+    function konversi(){
+      console.log("konversi");
+      
+      angka1 = document.getElementById("angka1").value;
+      convert1 = document.getElementById("convert1").value
+      convert2 = document.getElementById("convert2").value
+      if((convert1 == "mm") && (convert2 == "cm")){
+        result = eval(angka1)/10;
+        console.log(result);
+        document.getElementById("angka2").value = result;
+      }
     }
 
     function tambahTitik(){
-      if(current.length == 0){
-        current = "0.";
+      if(angka1.length == 0){
+        angka1 = "0.";
       } else {
-        if(current.indexOf(".") == -1){
-          current+= ".";
+        if(angka1.indexOf(".") == -1){
+          angka1+= ".";
         }
       }
-      document.getElementById("Display").value = current;
-    }
-
-    function plusMinus(){
-      if(current.indexOf("-") == 0){
-        current = current.substring(1);
-      } else {
-        current = "-"+current;
-      }
-      document.getElementById("Display").value = current;
+      document.getElementById("angka1").value = angka1;
     }
 
     function bersihkan(){
-      current = "0";
-      document.getElementById("angka1").value = current;
-      document.getElementById("angka2").value = current;
+      angka1 = "0";
+      document.getElementById("angka1").value = angka1;
+      document.getElementById("angka2").value = angka1;
     }
   </script>
 
