@@ -16,5 +16,5 @@
   <author href="https://dapurstudio.net" email="mail@dapurstudio.net">
       Bara Ramadhan Asdisusilo
   </author>
-
+  <plugin name="cordova.plugins.Keyboard.close" />>
 </widget>
