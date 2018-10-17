@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+  .row {
+    padding-top: 25px;
+  }
+  .card {
+    margin-top: 25px;
+  }
+  </style>
+  
+  <title>Kalkulator</title>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-body">
+    
+        <div class="row">
+          <div class="col-12">
+            <input type="text" id="Display" class="form-control form-control-lg text-right" readonly="readonly">
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-6">
+            <input type="button" value="C" class="btn btn-danger btn-block" onclick="bersihkan()">
+          </div>
+          <div class="col-6">
+            <input type="button" value="+/-" class="btn btn-primary btn-block" onclick="plusMinus()">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <input type="button" value="7" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="8" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="9" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="+" class="btn btn-success btn-block" onclick="operate(this.value)">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <input type="button" value="4" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="5" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="6" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="-" class="btn btn-success btn-block" onclick="operate(this.value)">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <input type="button" value="1" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="2" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="3" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="*" class="btn btn-success btn-block" onclick="operate(this.value)">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-3">
+            <input type="button" value="0" class="btn btn-default btn-block" onclick="tambahAngka(this.value)">
+          </div>
+          <div class="col-3">
+            <input type="button" value="." class="btn btn-default btn-block" onclick="tambahTitik()">
+          </div>
+          <div class="col-3">
+            <input type="button" value="=" class="btn btn-success btn-block" onclick="hasil()">
+          </div>
+          <div class="col-3">
+            <input type="button" value="/" class="btn btn-success btn-block" onclick="operate(this.value)">
+          </div>
+        </div>
+      </div
+    </div
+  </div>
+
+  <script src="js/jquery-slim.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+    memory = "0";
+    current = "0";
+    operasi = 0;
+    Layar = document.getElementById("Display").value;
+    
+
+    function tambahAngka(angka){
+      if((eval(current) == 0) && (current.indexOf(".") == -1)){
+        current = angka;
+      } else {
+        current += angka;
+      }
+      document.getElementById("Display").value = current;
+    }
+
+    function operate(op){
+      if(op.indexOf("+") > -1){ operasi = 1; }
+      if(op.indexOf("-") > -1){ operasi = 2; }
+      if(op.indexOf("*") > -1){ operasi = 3; }
+      if(op.indexOf("/") > -1){ operasi = 4; }
+
+      memory = current;
+      current="";
+      document.getElementById("Display").value = current;
+    }
+
+    function hasil(){
+      if(operasi == 1) { current = eval(memory) + eval(current); }
+      if(operasi == 2) { current = eval(memory) - eval(current); }
+      if(operasi == 3) { current = eval(memory) * eval(current); }
+      if(operasi == 4) { current = eval(memory) / eval(current); }
+
+      memory = "0";
+      operasi = 0;
+      document.getElementById("Display").value = current;
+    }
+
+    function tambahTitik(){
+      if(current.length == 0){
+        current = "0.";
+      } else {
+        if(current.indexOf(".") == -1){
+          current+= ".";
+        }
+      }
+      document.getElementById("Display").value = current;
+    }
+
+    function plusMinus(){
+      if(current.indexOf("-") == 0){
+        current = current.substring(1);
+      } else {
+        current = "-"+current;
+      }
+      document.getElementById("Display").value = current;
+    }
+
+    function bersihkan(){
+      current = "0";
+      document.getElementById("Display").value = current;
+    }
+  </script>
+
+</body>
+</html>

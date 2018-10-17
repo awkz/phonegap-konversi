@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link href="css/fontawesome.css" rel="stylesheet">
+  <style>
+  @media (max-width: @screen-xs) {
+    body{font-size: 10px;}
+  }
+
+  @media (max-width: @screen-sm) {
+      body{font-size: 14px;}
+  }
+  .row {
+    padding-top: 25px;
+  }
+  .card {
+    margin-top: 25px;
+  }
+  .fas {
+    font-size: 64px;
+    padding-top:10px;
+    padding-bottom:15px;
+  }
+  </style>
+  
+  <title>Kalkulator</title>
+</head>
+<body>
+  <div class="container">
+    
+    
+        <div class="row">
+          <div class="col-12">
+            <h3 class="text-center">Alat Hitung Canggih</h3>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-block" onclick="location.href = 'jarak.html';"><i class="fas fa-ruler"></i><h5>Jarak</h5></button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-block"><i class="fas fa-ruler-combined"></i><br><h5>Area</h5></button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-block"><i class="fas fa-balance-scale"></i><br><h5>Massa</h5></button>
+          </div>
+          <div class="col-6">
+            <button class="btn btn-block"><i class="fas fa-cube"></i><br><h5>Volume</h5></button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <button class="btn btn-block"><i class="fas fa-tachometer-alt"></i><br><h5>Kecepatan</h5></button>
+          </div>
+          
+        </div>
+      
+  </div>
+
+  <script src="js/jquery-slim.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script>
+    memory = "0";
+    current = "0";
+    operasi = 0;
+    Layar = document.getElementById("Display").value;
+    
+
+    function tambahAngka(angka){
+      if((eval(current) == 0) && (current.indexOf(".") == -1)){
+        current = angka;
+      } else {
+        current += angka;
+      }
+      document.getElementById("Display").value = current;
+    }
+
+    function operate(op){
+      if(op.indexOf("+") > -1){ operasi = 1; }
+      if(op.indexOf("-") > -1){ operasi = 2; }
+      if(op.indexOf("*") > -1){ operasi = 3; }
+      if(op.indexOf("/") > -1){ operasi = 4; }
+
+      memory = current;
+      current="";
+      document.getElementById("Display").value = current;
+    }
+
+    function hasil(){
+      if(operasi == 1) { current = eval(memory) + eval(current); }
+      if(operasi == 2) { current = eval(memory) - eval(current); }
+      if(operasi == 3) { current = eval(memory) * eval(current); }
+      if(operasi == 4) { current = eval(memory) / eval(current); }
+
+      memory = "0";
+      operasi = 0;
+      document.getElementById("Display").value = current;
+    }
+
+    function tambahTitik(){
+      if(current.length == 0){
+        current = "0.";
+      } else {
+        if(current.indexOf(".") == -1){
+          current+= ".";
+        }
+      }
+      document.getElementById("Display").value = current;
+    }
+
+    function plusMinus(){
+      if(current.indexOf("-") == 0){
+        current = current.substring(1);
+      } else {
+        current = "-"+current;
+      }
+      document.getElementById("Display").value = current;
+    }
+
+    function bersihkan(){
+      current = "0";
+      document.getElementById("Display").value = current;
+    }
+  </script>
+
+</body>
+</html>
