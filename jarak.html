@@ -142,14 +142,41 @@
     }
     
     function konversi(){
-      console.log("konversi");
-      
       angka1 = document.getElementById("angka1").value;
       convert1 = document.getElementById("convert1").value
       convert2 = document.getElementById("convert2").value
       if((convert1 == "mm") && (convert2 == "cm")){
         result = eval(angka1)/10;
-        console.log(result);
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "dm")){
+        result = eval(angka1)/100;
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "m")){
+        result = eval(angka1)/1000;
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "km")){
+        result = eval(angka1)/1000000;
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "ft")){
+        result = eval(angka1)/304.8;
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "in")){
+        result = eval(angka1)/25.4;
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "ly")){
+        result = eval(angka1)/304.8;
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "mi")){
+        result = eval(angka1)/304.8;
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "nmi")){
+        result = eval(angka1)/304.8;
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "ly")){
+        result = eval(angka1)/304.8;
+        document.getElementById("angka2").value = result;
+      } else if((convert1 == "mm") && (convert2 == "yd")){
+        result = eval(angka1)/914.4;
         document.getElementById("angka2").value = result;
       }
     }
